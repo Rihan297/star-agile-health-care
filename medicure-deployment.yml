@@ -1,34 +1,33 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: medicure-deployment
-  labels:
-    app: medicure
+  name: insureme
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
-      app: medicure
+      app: insureme
   template:
     metadata:
       labels:
-        app: medicure
+        app: insureme
     spec:
       containers:
-      - name: medicure
-        image: rihan297/demohelthcarerihan:1.0
+      - name: insureme
+        image: rihan297/demohealthcare:1.0   # ✅ must match Docker Hub image
         ports:
-        - containerPort: 8082
----
+        - containerPort: 8082                # ✅ app inside container listens here
+        imagePullPolicy: Always
+
 apiVersion: v1
 kind: Service
 metadata:
-  name: medicure-service
+  name: insureme
 spec:
-  type: NodePort
+  type: LoadBalancer         # ✅ easier for external access
   selector:
-    app: medicure
+    app: insureme
   ports:
-    - port: 8082
-      targetPort: 8082
-      nodePort: 30080   # external port to access app
+    - protocol: TCP
+      port: 8082             # ✅ external port
+      targetPort: 8082       # ✅ container port
