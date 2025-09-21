@@ -16,9 +16,9 @@ spec:
     spec:
       containers:
       - name: medicure
-        image: rihan297/medicure:1.0
+        image: rihan297/demohelthcarerihan:1.0
         ports:
-        - containerPort: 8080
+        - containerPort: 8082
 ---
 apiVersion: v1
 kind: Service
@@ -29,6 +29,6 @@ spec:
   selector:
     app: medicure
   ports:
-    - port: 8080
-      targetPort: 8080
+    - port: 8082
+      targetPort: 8082
       nodePort: 30080   # external port to access app
