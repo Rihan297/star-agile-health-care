@@ -17,8 +17,7 @@ spec:
           image: rihan297/demohealthcare:1.0
           imagePullPolicy: Always
           ports:
-            - containerPort: 8080
-
+            - containerPort: 8080   # App listens here
 ---
 apiVersion: v1
 kind: Service
@@ -31,4 +30,4 @@ spec:
   ports:
     - port: 8080
       targetPort: 8080
-      nodePort: 32080
+      nodePort: 32080   # Fixed NodePort
