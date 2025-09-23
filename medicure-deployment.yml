@@ -24,7 +24,7 @@ kind: Service
 metadata:
   name: insureme
 spec:
-  type: NodePort
+  type: NodePort   # Change from LoadBalancer
   selector:
     app: insureme
   ports:
