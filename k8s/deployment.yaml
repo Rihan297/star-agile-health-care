@@ -1,34 +1,35 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: medicure-deployment
+  name: insureme
   labels:
-    app: medicure
+    app: insureme
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
-      app: medicure
+      app: insureme
   template:
     metadata:
       labels:
-        app: medicure
+        app: insureme
     spec:
       containers:
-      - name: medicure
-        image: rihan297/medicure:1.0
-        ports:
-        - containerPort: 8080
+        - name: insureme
+          image: rihan297/demohealthcare:1.0
+          ports:
+            - containerPort: 8082
+
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: medicure-service
+  name: insureme
 spec:
-  type: NodePort
+  type: LoadBalancer
   selector:
-    app: medicure
+    app: insureme
   ports:
-    - port: 8080
-      targetPort: 8080
-      nodePort: 30080   # external port to access app
+    - protocol: TCP
+      port: 8082        # exposed port on LoadBalancer
+      targetPort: 8082  # container port
