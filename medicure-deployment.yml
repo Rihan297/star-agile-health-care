@@ -15,19 +15,18 @@ spec:
       containers:
         - name: insureme
           image: rihan297/demohealthcare:1.0
-          imagePullPolicy: Always
           ports:
-            - containerPort: 8080   # App listens here
+            - containerPort: 8082
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: insureme
 spec:
-  type: LoadBalancer
+  type: LoadBalancer   # <--- gives you a public AWS ELB
   selector:
     app: insureme
   ports:
     - protocol: TCP
-      port: 8082
-      targetPort: 8082
+      port: 8082        # service port
+      targetPort: 8082  # container port
