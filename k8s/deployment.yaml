@@ -26,10 +26,10 @@ kind: Service
 metadata:
   name: insureme
 spec:
-  type: LoadBalancer
+  type: NodePort   # 👈 Change this from LoadBalancer to NodePort
   selector:
     app: insureme
   ports:
-    - protocol: TCP
-      port: 8082        # exposed port on LoadBalancer
-      targetPort: 8082  # container port
+    - port: 8082       # Service port
+      targetPort: 8082 # Container port
+      nodePort: 32080  # Fixed NodePort (can be any between 30000-32767)
